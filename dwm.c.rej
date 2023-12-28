@@ -1,10 +1,14 @@
 --- dwm.c
 +++ dwm.c
-@@ -162,6 +162,7 @@ static void destroynotify(XEvent *e);
- static void detach(Client *c);
- static void detachstack(Client *c);
- static Monitor *dirtomon(int dir);
-+static void dragcfact(const Arg *arg);
- static void drawbar(Monitor *m);
- static void drawbars(void);
- static void enternotify(XEvent *e);
+@@ -1919,7 +1941,10 @@ updategeom(void)
+ 					m->clients = c->next;
+ 					detachstack(c);
+ 					c->mon = mons;
+-					attach(c);
++					if( attachbelow )
++						attachBelow(c);
++					else
++						attach(c);
+ 					attachstack(c);
+ 				}
+ 				if (m == selmon)
