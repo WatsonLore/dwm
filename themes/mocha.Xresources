@@ -1,0 +1,36 @@
+! dwm.font: JetBrainsMono Nerd Font:style:light:pixelsize=10 
+
+dwm.background: #1E1E2E
+dwm.foreground: #CDD6F4
+
+! black
+dwm.color0: #45475A
+dwm.color8: #585B70
+
+! red
+dwm.color1: #F38BA8
+dwm.color9: #F38BA8
+
+! green
+dwm.color2: #A6E3A1
+dwm.color10: #A6E3A1
+
+! yellow
+dwm.color3: #F9E2AF
+dwm.color11: #F9E2AF
+
+! blue
+dwm.color4: #89B4FA
+dwm.color12: #89B4FA
+
+! magenta
+dwm.color5: #CBA6F7
+dwn.color13: #F5C2E7
+
+! cyan
+*color6: #94E2D5
+dwm.color14: #94E2D5
+
+! white
+dwm.color7: #BAC2DE
+dwm.color15: #A6ADC8

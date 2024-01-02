@@ -5,28 +5,49 @@
 #define ICONSIZE 16   /* icon size */
 #define ICONSPACING 5 /* space between icon and title */
 
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+
 static const int vertpad            = 10;       /* vertical padding of bar */
 static const int sidepad            = 10;       /* horizontal padding of bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+
+static unsigned int borderpx  = 0;        /* border pixel of windows */
+static unsigned int snap      = 32;       /* snap pixel */
+
+static int showbar            = 1;        /* 0 means no bar */
+static int topbar             = 1;        /* 0 means bottom bar */
+
+static char font[]            = "JetBrainsMono Nerd Font:style:light:size=11";
+static char dmenufont[]       = "JetBrainsMono Nerd Font:style:light:size=11";
+static const char *fonts[]          = { font };
+
+static char bgd[]               = "#000000";  /* Background  */
+static char fgd[]               = "#ffffff";  /* Foreground */
+static char col0[]              = "#000000";  /* Black */
+static char col1[]              = "#cc0403";  /* Red */
+static char col2[]              = "#19cb00";  /* Green */
+static char col3[]              = "#cecb00";  /* Yellow */
+static char col4[]              = "#001cd1";  /* Blue */
+static char col5[]              = "#cb1ed1";  /* Magenta */
+static char col6[]              = "#0dcdcd";  /* Cyan */
+static char col7[]              = "#e5e5e5";  /* White */
+static char col8[]              = "#4d4d4d";  /* Grey */
+static char col9[]              = "#3e0605";  /* Bright Red */
+static char col10[]             = "#23fd00";  /* Bright Green */
+static char col11[]             = "#fffd00";  /* Bright Yellow */
+static char col12[]             = "#0026ff";  /* Bright Blue */
+static char col13[]             = "#fd28ff";  /* Bright Magenta */
+static char col14[]             = "#14ffff";  /* Bright Cyan */
+static char col15[]             = "#ffffff";  /* Bright White */
+
+static char *colors[][3] = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { fgd,	     bgd,         col0 },
+       [SchemeSel]  = { col5, 	     bgd,	  col5  },
 };
 
 /* tagging */
@@ -48,9 +69,9 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static int nmaster     = 1;    /* number of clients in master area */
+static int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int attachbelow = 1;    /* 1 means attach after the currently active window */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
@@ -87,8 +108,42 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", bgd, "-nf", col15, "-sb", col5, "-sf", bgd, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+		{ "font",               STRING,  &font },
+		{ "dmenufont",          STRING,  &dmenufont },
+		{ "borderpx",          	INTEGER, &borderpx },
+		{ "snap",          	INTEGER, &snap },
+		{ "showbar",          	INTEGER, &showbar },
+		{ "topbar",          	INTEGER, &topbar },
+		{ "nmaster",          	INTEGER, &nmaster },
+		{ "resizehints",       	INTEGER, &resizehints },
+		{ "mfact",      	FLOAT,   &mfact },
+		{ "foreground",     	STRING,  &fgd },
+		{ "background",    	STRING,  &bgd },
+		{ "color0",         	STRING,  &col0 },
+		{ "color1",         	STRING,  &col1 },
+		{ "color2",         	STRING,  &col2 },
+		{ "color3",         	STRING,  &col3 },
+		{ "color4",         	STRING,  &col4 },
+		{ "color5",         	STRING,  &col5 },
+		{ "color6",         	STRING,  &col6 },
+		{ "color7",         	STRING,  &col7 },
+		{ "color8",         	STRING,  &col8 },
+		{ "color9",         	STRING,  &col9 },
+		{ "color10",        	STRING,  &col10 },
+		{ "color11",        	STRING,  &col11 },
+		{ "color12",        	STRING,  &col12 },
+		{ "color13",       	STRING,  &col13 },
+		{ "color14",        	STRING,  &col14 },
+		{ "color15",        	STRING,  &col15 },
+
+};
 
 #include "selfrestart.c"
 #include "movestack.c"
@@ -157,7 +212,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-    { MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
+    	{ MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
